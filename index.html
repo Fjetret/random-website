@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Weird Website</title>
+    <title>Take Me To Weird</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589327467123030" crossorigin="anonymous"></script>
     <style>
         /* Generelle justeringer */
         html, body {
@@ -44,7 +45,6 @@
             position: relative;
         }
 
-        /* Sideannonser */
         .sidebar {
             position: absolute;
             top: 90px;
@@ -75,7 +75,6 @@
             border-radius: 8px;
         }
 
-        /* Hovedinnhold */
         .main-content {
             flex: 1;
             display: flex;
@@ -90,20 +89,6 @@
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .main-content h1 {
-            font-size: 28px;
-            font-weight: 600;
-            color: #343a40;
-            margin-bottom: 10px;
-        }
-
-        .main-content p {
-            font-size: 16px;
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-
-        /* Knapper */
         .random-button {
             padding: 12px 24px;
             font-size: 16px;
@@ -122,137 +107,24 @@
             background-color: #0056b3;
             transform: scale(1.05);
         }
-
-        .submit-container {
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-        }
-
-        .submit-button {
-            padding: 6px 14px;
-            font-size: 14px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease-in-out;
-            text-transform: uppercase;
-            box-shadow: 0px 4px 6px rgba(40, 167, 69, 0.2);
-        }
-
-        .submit-button:hover {
-            background-color: #218838;
-            transform: scale(1.05);
-        }
-
-        /* Popup styling */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            z-index: 20;
-        }
-
-        .popup h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #343a40;
-        }
-
-        .popup input {
-            width: 90%;
-            padding: 8px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .popup button {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .popup .submit-btn {
-            background-color: #007BFF;
-            color: white;
-            margin-bottom: 5px;
-        }
-
-        .popup .submit-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .popup .close-btn {
-            background-color: red;
-            color: white;
-        }
-
-        .popup .close-btn:hover {
-            background-color: darkred;
-        }
-
     </style>
 </head>
 <body>
     <div class="header">Your Ad Here - Leaderboard Banner (728x90)</div>
-
     <div class="sidebar left-sidebar"><div class="ad-space">Ad 1</div></div>
     <div class="sidebar right-sidebar"><div class="ad-space">Ad 2</div></div>
-
     <div class="container">
         <div class="main-content">
             <h1>Random Weird Website</h1>
             <p>Click the button to go to a random weird website!</p>
-            <button class="random-button" onclick="goToRandomSite()">Take Me There!</button>
+            <button class="random-button" onclick="goToRandomSite()">Take Me To Weird!</button>
         </div>
     </div>
-
-    <div class="submit-container">
-        <button class="submit-button" onclick="openPopup()">Submit a Website</button>
-    </div>
-
     <div class="footer">Footer Ad Space (728x90)</div>
-
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="popup">
-        <h2>Submit a Website</h2>
-        <input type="text" id="website-url" placeholder="Enter website URL">
-        <button class="submit-btn" onclick="submitWebsite()">Submit</button>
-        <button class="close-btn" onclick="closePopup()">Close</button>
-    </div>
-
     <script>
         function goToRandomSite() {
-            const sites = [ "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
+            const sites = [
+                "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
             "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
             "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
             "https://checkboxrace.com", "https://papertoilet.com", "https://www.trypap.com",
@@ -297,12 +169,10 @@
             "https://astronaut.io/", "https://www.weirdorconfusing.com/",
             "https://www.findtheinvisiblecow.com/", "https://infinitemac.org/",
             "http://www.howmanypeopleareinspacerightnow.com/", "https://www.deathball.net/notpron/",
-            "https://www.findtheinvisiblecow.com/", "https://www.cat-bounce.com/"];
+            "https://www.findtheinvisiblecow.com/", "https://www.cat-bounce.com/"
+            ];
             window.open(sites[Math.floor(Math.random() * sites.length)], "_blank");
         }
-
-        function openPopup() { document.getElementById("popup").style.display = "block"; document.getElementById("overlay").style.display = "block"; }
-        function closePopup() { document.getElementById("popup").style.display = "none"; document.getElementById("overlay").style.display = "none"; }
     </script>
 </body>
 </html>
