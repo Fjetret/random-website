@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Take Me To Weird</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Take Me To Weird!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589327467123030" crossorigin="anonymous"></script>
     <style>
         html, body {
@@ -16,22 +16,25 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #f8f9fa;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             font-family: 'Poppins', sans-serif;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🚀</text></svg>") 16 0, auto;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .header, .footer {
-            background-color: #007BFF;
-            text-align: center;
-            font-size: 14px;
             width: 100%;
             height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 600;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .container {
@@ -49,29 +52,16 @@
             top: 90px;
             bottom: 90px;
             width: 180px;
-            background-color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
         }
 
-        .left-sidebar { left: 10px; }
-        .right-sidebar { right: 10px; }
-
-        .ad-space {
-            width: 100%;
-            height: 100%;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #adb5bd;
-            color: #495057;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 8px;
+        .left-sidebar { 
+            left: 10px;
+        }
+        .right-sidebar { 
+            right: 10px;
         }
 
         .main-content {
@@ -82,30 +72,74 @@
             justify-content: center;
             text-align: center;
             max-width: 600px;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .random-button {
-            padding: 12px 24px;
-            font-size: 16px;
-            background-color: #007BFF;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease-in-out;
             text-transform: uppercase;
-            box-shadow: 0px 4px 6px rgba(0, 123, 255, 0.2);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
         .random-button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.3);
         }
+
+        .random-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .floating-emojis {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
     </style>
 </head>
 <body>
@@ -146,9 +180,9 @@
 
     <div class="container">
         <div class="main-content">
-            <h1>Random Weird Website</h1>
-            <p>Click the button to go to a random weird website!</p>
-            <button class="random-button" onclick="goToRandomSite()">Take Me To Weird!</button>
+            <h1>Random Weird Website!</h1>
+            <p>Click the button to visit a random weird website! 🎲✨</p>
+            <button class="random-button" onclick="goToRandomSite()">Take Me To Weird! 🚀</button>
         </div>
     </div>
 
@@ -165,9 +199,9 @@
     </div>
 
     <script>
-        function goToRandomSite() {
-            const sites = [
-                "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
+        // Beholder den originale listen med nettsider
+        const sites = [
+            "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
             "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
             "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
             "https://checkboxrace.com", "https://papertoilet.com", "https://www.trypap.com",
@@ -211,9 +245,70 @@
             "https://www.findtheinvisiblecow.com/", "https://infinitemac.org/",
             "http://www.howmanypeopleareinspacerightnow.com/", "https://www.deathball.net/notpron/",
             "https://www.findtheinvisiblecow.com/", "https://www.cat-bounce.com/"
-            ];
-            window.open(sites[Math.floor(Math.random() * sites.length)], "_blank");
+        ];
+
+        function goToRandomSite() {
+            createFloatingEmojis();
+            setTimeout(() => {
+                window.open(sites[Math.floor(Math.random() * sites.length)], "_blank");
+            }, 500);
         }
+
+        function createFloatingEmojis() {
+            const emojis = ['🚀', '✨', '🎮', '🎨', '🎪', '🎭', '🎢', '🎡'];
+            for (let i = 0; i < 15; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emojis';
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = Math.random() * window.innerHeight + 'px';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(emoji);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 5;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+
+                let x = parseFloat(emoji.style.left);
+                let y = parseFloat(emoji.style.top);
+
+                const animate = () => {
+                    x += dx;
+                    y += dy;
+                    emoji.style.left = x + 'px';
+                    emoji.style.top = y + 'px';
+
+                    if (x < -50 || x > window.innerWidth + 50 || 
+                        y < -50 || y > window.innerHeight + 50) {
+                        emoji.remove();
+                    } else {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+        }
+
+        // Legg til musespor-effekt
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.1) {  // 10% sjanse for å lage en emoji
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emojis';
+                emoji.style.left = e.pageX + 'px';
+                emoji.style.top = e.pageY + 'px';
+                emoji.textContent = '✨';
+                emoji.style.opacity = '0.7';
+                document.body.appendChild(emoji);
+
+                setTimeout(() => {
+                    emoji.style.transition = 'all 1s';
+                    emoji.style.opacity = '0';
+                    emoji.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+                    setTimeout(() => emoji.remove(), 1000);
+                }, 50);
+            }
+        });
     </script>
 </body>
 </html>
