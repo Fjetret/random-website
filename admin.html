@@ -203,8 +203,7 @@
 
     <script>
         // Sikkerhetskonfigurasjon
-        const SALT = "Yx5$mK9#pL2@nV7"; // Ny salt-verdi
-        const CORRECT_HASH = "5e02751c1f48093a8d6c04b7e6a9f72f499495e4635e2fc928cd46f2895e945f"; // Hash av "Kj9#mP2$vL8@nX4" + SALT
+        const ADMINPASS = "TakeMe2Weird!"; // Det faktiske passordet
 
         // Funksjon for å hashe tekst med SHA-256
         async function sha256(text) {
@@ -251,9 +250,8 @@
             }
 
             const password = document.getElementById('password').value;
-            const hashedInput = await sha256(password + SALT);
             
-            if (hashedInput === CORRECT_HASH) {
+            if (password === ADMINPASS) {
                 localStorage.setItem('adminLoggedIn', 'true');
                 localStorage.setItem('lastLoginTime', Date.now().toString());
                 document.getElementById('loginPanel').style.display = 'none';
