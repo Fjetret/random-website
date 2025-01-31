@@ -77,39 +77,54 @@
             color: #888;
         }
 
-        .article-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 40px 20px;
-        }
-
-        .modal-content {
+        .single-article {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
+            margin: 40px auto;
+            padding: 40px;
             border-radius: 20px;
-            position: relative;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
+        .single-article h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .single-article .metadata {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .single-article .content {
+            font-size: 16px;
+            line-height: 1.8;
             color: #333;
         }
 
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #23a6d5, #23d5ab);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
 
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
             .container {
                 margin: 20px auto;
                 padding: 15px;
@@ -124,80 +139,90 @@
                 font-size: 20px;
             }
 
-            .modal-content {
+            .single-article {
                 margin: 20px;
                 padding: 20px;
+            }
+
+            .single-article h1 {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Weird Articles</h1>
-        <div class="articles-grid" id="articlesGrid">
-            <!-- Articles will be dynamically inserted here -->
-        </div>
-    </div>
-
-    <div class="article-modal" id="articleModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">×</span>
-            <div id="modalContent"></div>
-        </div>
+    <div class="container" id="mainContent">
+        <!-- Innhold vil bli satt dynamisk av JavaScript -->
     </div>
 
     <script>
-        function renderArticles() {
+        function showArticlesList() {
             const articles = JSON.parse(localStorage.getItem('articles') || '[]');
-            const grid = document.getElementById('articlesGrid');
+            const container = document.getElementById('mainContent');
             
-            if (articles.length === 0) {
-                grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">No articles yet. Go to admin page to create some!</p>';
-                return;
-            }
-
-            grid.innerHTML = articles.map(article => `
-                <div class="article-card" onclick="openArticle(${article.id})">
-                    <div class="article-title">${article.title}</div>
-                    <div class="article-summary">${article.summary}</div>
-                    <div class="article-date">${new Date(article.date).toLocaleDateString()}</div>
-                </div>
-            `).join('');
-        }
-
-        function openArticle(id) {
-            const articles = JSON.parse(localStorage.getItem('articles') || '[]');
-            const article = articles.find(a => a.id === id);
-            const modal = document.getElementById('articleModal');
-            const modalContent = document.getElementById('modalContent');
-            
-            modalContent.innerHTML = `
-                <h2>${article.title}</h2>
-                <p><em>${article.summary}</em></p>
-                <div>${article.content}</div>
-                <div class="article-date">${new Date(article.date).toLocaleDateString()}</div>
+            let html = `
+                <h1>Weird Articles</h1>
+                <div class="articles-grid">
             `;
             
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('articleModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Initial render
-        renderArticles();
-
-        // Close modal when clicking outside
-        document.getElementById('articleModal').addEventListener('click', (e) => {
-            if (e.target.className === 'article-modal') {
-                closeModal();
+            if (articles.length === 0) {
+                html += '<p style="text-align: center; grid-column: 1/-1;">No articles yet...</p>';
+            } else {
+                html += articles.map(article => `
+                    <div class="article-card" onclick="showArticle('${article.id}')">
+                        <div class="article-title">${article.title}</div>
+                        <div class="article-summary">${article.summary}</div>
+                        <div class="article-date">${new Date(article.date).toLocaleDateString()}</div>
+                    </div>
+                `).join('');
             }
-        });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function showArticle(id) {
+            const articles = JSON.parse(localStorage.getItem('articles') || '[]');
+            const article = articles.find(a => a.id === parseInt(id));
+            const container = document.getElementById('mainContent');
+            
+            container.innerHTML = `
+                <div class="single-article">
+                    <a href="javascript:void(0)" onclick="showArticlesList()" class="back-button">← Back to Articles</a>
+                    <h1>${article.title}</h1>
+                    <div class="metadata">
+                        Published on ${new Date(article.date).toLocaleDateString()}
+                    </div>
+                    <div class="content">
+                        ${article.content}
+                    </div>
+                </div>
+            `;
+
+            // Oppdater URL
+            window.history.pushState({ articleId: id }, '', `?article=${id}`);
+        }
+
+        // Håndter browser back/forward
+        window.onpopstate = function(event) {
+            if (event.state?.articleId) {
+                showArticle(event.state.articleId);
+            } else {
+                showArticlesList();
+            }
+        };
+
+        // Sjekk URL ved lasting
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('article');
+            
+            if (articleId) {
+                showArticle(articleId);
+            } else {
+                showArticlesList();
+            }
+        };
     </script>
 </body>
 </html>
