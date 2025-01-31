@@ -3,80 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
     <style>
-        html, body {
+        * {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            width: 100%;
-            background: linear-gradient(135deg, #00b4db, #0083b0);
-            font-family: 'Press Start 2P', cursive;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Login Panel */
         #loginPanel {
             max-width: 400px;
             margin: 100px auto;
-            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            color: #0083b0;
-            font-size: 20px;
+        #loginPanel h1 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            font-size: 24px;
+            font-weight: 600;
         }
 
         .form-group {
             margin-bottom: 20px;
         }
 
-        label {
+        .form-group label {
             display: block;
-            color: #0083b0;
             margin-bottom: 8px;
-            text-align: center;
+            font-size: 14px;
+            color: #666;
         }
 
         input[type="password"] {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
             font-size: 16px;
-            transition: all 0.3s ease;
         }
 
         input[type="password"]:focus {
             outline: none;
-            border-color: #0083b0;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .login-btn {
             width: 100%;
             padding: 12px;
-            background: #00b4db;
+            background: #2563eb;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s;
         }
 
         .login-btn:hover {
-            background: #0083b0;
+            background: #1d4ed8;
         }
 
+        /* Admin Content */
         #adminContent {
             display: none;
             max-width: 1200px;
             margin: 40px auto;
-            padding: 20px;
+            padding: 0 20px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            font-size: 24px;
+            color: #1a1a1a;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .admin-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+        }
+
+        .form-control label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .form-control input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .articles-list {
+            margin-top: 30px;
+        }
+
+        .article-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .article-info h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .article-date {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .delete-btn {
+            padding: 6px 12px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
         }
     </style>
 </head>
@@ -91,74 +219,66 @@
     </div>
 
     <div id="adminContent">
-        <button class="logout-btn" onclick="logout()">Logout</button>
-        <div class="container">
-            <div class="admin-panel">
-                <h1>Article Admin</h1>
-                <form id="articleForm">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" name="title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="summary">Summary</label>
-                        <input type="text" id="summary" name="summary" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="content">Content</label>
-                        <textarea id="content" name="content" required></textarea>
-                    </div>
-                    <div class="button-group">
-                        <button type="button" class="preview-btn" onclick="previewArticle()">Preview</button>
-                        <button type="submit" class="save-btn">Save Article</button>
-                    </div>
-                </form>
-            </div>
-            <div id="preview"></div>
+        <div class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
 
-            <div class="admin-panel" style="margin-top: 30px;">
-                <h2 style="font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Manage Articles</h2>
-                <div id="articlesList"></div>
-            </div>
+        <div class="admin-panel">
+            <form id="articleForm">
+                <div class="form-control">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-control">
+                    <label for="summary">Summary</label>
+                    <input type="text" id="summary" required>
+                </div>
+                <div class="form-control">
+                    <label for="content">Content</label>
+                    <textarea id="content" required></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="previewArticle()">Preview</button>
+                    <button type="submit" class="btn btn-primary">Save Article</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="preview" class="admin-panel" style="display: none;"></div>
+
+        <div class="admin-panel">
+            <h2>Articles</h2>
+            <div id="articlesList" class="articles-list"></div>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
+        // Sikkerhetskonfigurasjon (obfuskert)
+        const _0x4f8e=['TakeMe2Weird!'];const _0x5c2d=function(_0x4f8e){return _0x4f8e[0];};
+        let loginAttempts = 0;
+        let lastLoginAttempt = 0;
+
         // TinyMCE initialisering
         tinymce.init({
             selector: '#content',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            height: 500,
-            menubar: false,
-            statusbar: false,
-            content_style: 'body { font-family: "Poppins", sans-serif; }'
+            plugins: 'lists link image table code',
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | table | code',
+            height: 400,
+            menubar: false
         });
-    </script>
-        // Sikkerhetskonfigurasjon
-        const ADMINPASS = "TakeMe2Weird!"; // Det faktiske passordet
 
-        // Funksjon for å hashe tekst med SHA-256
-        async function sha256(text) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(text);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            return hashHex;
-        }
+        window.onload = function() {
+            checkLoginStatus();
+        };
 
-        // Sjekk login status når siden lastes
-        window.onload = async function() {
-            const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
-            const lastLoginTime = parseInt(localStorage.getItem('lastLoginTime') || '0');
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('_auth') === 'true';
+            const lastLoginTime = parseInt(localStorage.getItem('_ts') || '0');
             const currentTime = Date.now();
             
-            // Automatisk utlogging etter 30 minutter
             if (isLoggedIn && (currentTime - lastLoginTime > 30 * 60 * 1000)) {
                 logout();
-                alert('Session expired. Please login again.');
                 return;
             }
 
@@ -167,27 +287,22 @@
             if (isLoggedIn) {
                 renderArticlesList();
             }
-        };
-
-        // Håndter innloggingsforsøk med rate limiting
-        let loginAttempts = 0;
-        let lastLoginAttempt = 0;
+        }
 
         async function login() {
             const currentTime = Date.now();
             
-            // Sjekk for rate limiting
-            if (loginAttempts >= 3 && currentTime - lastLoginAttempt < 300000) { // 5 minutter lockout
+            if (loginAttempts >= 3 && currentTime - lastLoginAttempt < 300000) {
                 const remainingTime = Math.ceil((300000 - (currentTime - lastLoginAttempt)) / 60000);
-                alert(`Too many login attempts. Please try again in ${remainingTime} minutes.`);
+                alert(`Too many attempts. Try again in ${remainingTime} minutes.`);
                 return;
             }
 
             const password = document.getElementById('password').value;
             
-            if (password === ADMINPASS) {
-                localStorage.setItem('adminLoggedIn', 'true');
-                localStorage.setItem('lastLoginTime', Date.now().toString());
+            if (password === _0x5c2d(_0x4f8e)) {
+                localStorage.setItem('_auth', 'true');
+                localStorage.setItem('_ts', Date.now().toString());
                 document.getElementById('loginPanel').style.display = 'none';
                 document.getElementById('adminContent').style.display = 'block';
                 renderArticlesList();
@@ -201,16 +316,15 @@
         }
 
         function logout() {
-            localStorage.removeItem('adminLoggedIn');
-            localStorage.removeItem('lastLoginTime');
-            document.getElementById('loginPanel').style.display = 'block';
-            document.getElementById('adminContent').style.display = 'none';
+            localStorage.removeItem('_auth');
+            localStorage.removeItem('_ts');
+            window.location.reload();
         }
 
         function previewArticle() {
             const title = document.getElementById('title').value;
             const summary = document.getElementById('summary').value;
-            const content = document.getElementById('content').value;
+            const content = tinymce.get('content').getContent();
             const preview = document.getElementById('preview');
 
             preview.innerHTML = `
@@ -231,15 +345,12 @@
             }
 
             list.innerHTML = articles.map(article => `
-                <div style="background: rgba(255, 255, 255, 0.8); padding: 15px; margin-bottom: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <strong>${article.title}</strong>
-                        <br>
-                        <small>${new Date(article.date).toLocaleDateString()}</small>
+                <div class="article-item">
+                    <div class="article-info">
+                        <h3>${article.title}</h3>
+                        <div class="article-date">${new Date(article.date).toLocaleDateString()}</div>
                     </div>
-                    <button onclick="deleteArticle(${article.id})" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-                        Delete
-                    </button>
+                    <button onclick="deleteArticle(${article.id})" class="delete-btn">Delete</button>
                 </div>
             `).join('');
         }
@@ -256,41 +367,26 @@
         document.getElementById('articleForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = {
-                id: Date.now(), // Using timestamp as a simple unique ID
+                id: Date.now(),
                 title: document.getElementById('title').value,
                 summary: document.getElementById('summary').value,
-                content: document.getElementById('content').value,
+                content: tinymce.get('content').getContent(),
                 date: new Date().toISOString()
             };
 
-            // Get existing articles or initialize empty array
             const articles = JSON.parse(localStorage.getItem('articles') || '[]');
-            
-            // Add new article
             articles.push(formData);
-            
-            // Save back to localStorage
             localStorage.setItem('articles', JSON.stringify(articles));
             
-            // Clear form and preview
             document.getElementById('articleForm').reset();
+            tinymce.get('content').setContent('');
             document.getElementById('preview').style.display = 'none';
             
-            // Update the articles list
             renderArticlesList();
-            
-            alert('Article saved! Check the articles page to view it.');
+            alert('Article saved!');
         });
 
-        // Sjekk login status periodisk
-        setInterval(() => {
-            const lastLoginTime = parseInt(localStorage.getItem('lastLoginTime') || '0');
-            const currentTime = Date.now();
-            if (currentTime - lastLoginTime > 30 * 60 * 1000) { // 30 minutter
-                logout();
-                alert('Session expired. Please login again.');
-            }
-        }, 60000); // Sjekk hvert minutt
+        setInterval(checkLoginStatus, 60000);
     </script>
 </body>
 </html>
