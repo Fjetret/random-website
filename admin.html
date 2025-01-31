@@ -236,7 +236,7 @@
                 </div>
                 <div class="form-control">
                     <label for="content">Content</label>
-                    <textarea id="content" required></textarea>
+                    <textarea id="content" name="content"></textarea>
                 </div>
                 <div class="button-group">
                     <button type="button" class="btn btn-secondary" onclick="previewArticle()">Preview</button>
@@ -366,11 +366,22 @@
 
         document.getElementById('articleForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            // Validering
+            const title = document.getElementById('title').value.trim();
+            const summary = document.getElementById('summary').value.trim();
+            const content = tinymce.get('content').getContent().trim();
+
+            if (!title || !summary || !content) {
+                alert('Please fill in all fields');
+                return;
+            }
+
             const formData = {
                 id: Date.now(),
-                title: document.getElementById('title').value,
-                summary: document.getElementById('summary').value,
-                content: tinymce.get('content').getContent(),
+                title: title,
+                summary: summary,
+                content: content,
                 date: new Date().toISOString()
             };
 
