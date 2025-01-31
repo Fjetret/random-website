@@ -11,48 +11,24 @@
             padding: 0;
             min-height: 100vh;
             width: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .admin-panel {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+            font-family: 'Press Start 2P', cursive;
         }
 
         #loginPanel {
             max-width: 400px;
             margin: 100px auto;
-            text-align: center;
-        }
-
-        #adminContent {
-            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-family: 'Press Start 2P', cursive;
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 30px;
+            color: #0083b0;
+            font-size: 20px;
             text-align: center;
+            margin-bottom: 30px;
         }
 
         .form-group {
@@ -61,105 +37,51 @@
 
         label {
             display: block;
+            color: #0083b0;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
+            text-align: center;
         }
 
-        input[type="text"], 
-        input[type="password"], 
-        textarea {
+        input[type="password"] {
             width: 100%;
             padding: 12px;
-            border: 2px solid rgba(0, 0, 0, 0.1);
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            background: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
             transition: all 0.3s ease;
         }
 
-        textarea {
-            min-height: 200px;
-            resize: vertical;
-        }
-
-        input[type="text"]:focus, 
-        input[type="password"]:focus, 
-        textarea:focus {
+        input[type="password"]:focus {
             outline: none;
-            border-color: #23a6d5;
-            box-shadow: 0 0 10px rgba(35, 166, 213, 0.3);
+            border-color: #0083b0;
         }
 
-        .button-group {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 12px 24px;
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #00b4db;
+            color: white;
             border: none;
             border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .save-btn, .login-btn {
-            background: linear-gradient(45deg, #23a6d5, #23d5ab);
-            color: white;
-            width: 100%;
+        .login-btn:hover {
+            background: #0083b0;
         }
 
-        .preview-btn {
-            background: rgba(0, 0, 0, 0.1);
-            color: #333;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .logout-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 20px auto;
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 20px;
-            }
-
-            .admin-panel {
-                padding: 20px;
-            }
-
-            .logout-btn {
-                top: 10px;
-                right: 10px;
-                padding: 6px 12px;
-            }
+        #adminContent {
+            display: none;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <div id="loginPanel" class="admin-panel">
+    <div id="loginPanel">
         <h1>Admin Login</h1>
         <div class="form-group">
             <label for="password">Password</label>
