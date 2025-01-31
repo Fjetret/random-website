@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weird Articles</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Articles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        html, body {
+        * {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            width: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
 
         .container {
@@ -37,58 +33,54 @@
         }
 
         .article-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: white;
+            border-radius: 12px;
             padding: 20px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
 
         .article-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
-            font-family: 'Press Start 2P', cursive;
-            color: #333;
-            font-size: 24px;
+            color: #1a1a1a;
+            font-size: 32px;
             margin-bottom: 30px;
             text-align: center;
         }
 
         .article-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
-            color: #333;
+            color: #1a1a1a;
             margin-bottom: 10px;
         }
 
         .article-summary {
-            font-size: 14px;
+            font-size: 16px;
             color: #666;
             margin-bottom: 15px;
         }
 
         .article-date {
-            font-size: 12px;
+            font-size: 14px;
             color: #888;
         }
 
         .single-article {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: white;
             max-width: 800px;
             margin: 40px auto;
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .single-article h1 {
-            font-family: 'Poppins', sans-serif;
             font-size: 32px;
             margin-bottom: 20px;
             text-align: left;
@@ -111,17 +103,17 @@
         .back-button {
             display: inline-block;
             padding: 10px 20px;
-            background: linear-gradient(45deg, #23a6d5, #23d5ab);
+            background: #2563eb;
             color: white;
             text-decoration: none;
-            border-radius: 30px;
+            border-radius: 6px;
             margin-bottom: 20px;
             transition: all 0.3s ease;
         }
 
         .back-button:hover {
+            background: #1d4ed8;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         @media (max-width: 768px) {
@@ -136,7 +128,7 @@
             }
 
             h1 {
-                font-size: 20px;
+                font-size: 24px;
             }
 
             .single-article {
@@ -152,77 +144,115 @@
 </head>
 <body>
     <div class="container" id="mainContent">
-        <!-- Innhold vil bli satt dynamisk av JavaScript -->
+        <!-- Content will be dynamically inserted here -->
     </div>
 
-    <script>
-        function showArticlesList() {
-            const articles = JSON.parse(localStorage.getItem('articles') || '[]');
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getFirestore, 
+            collection, 
+            getDocs,
+            doc,
+            getDoc
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3O3gejkuDD4oIjC8UrhFeoB0JuhNokpA",
+            authDomain: "takemetoweird.firebaseapp.com",
+            projectId: "takemetoweird",
+            storageBucket: "takemetoweird.firebasestorage.app",
+            messagingSenderId: "998902491409",
+            appId: "1:998902491409:web:d4489b86956449987284b0",
+            measurementId: "G-TML3MKY1ZE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Make functions available globally
+        window.showArticle = async function(id) {
             const container = document.getElementById('mainContent');
             
-            let html = `
-                <h1>Weird Articles</h1>
-                <div class="articles-grid">
-            `;
-            
-            if (articles.length === 0) {
-                html += '<p style="text-align: center; grid-column: 1/-1;">No articles yet...</p>';
-            } else {
-                html += articles.map(article => `
-                    <div class="article-card" onclick="showArticle('${article.id}')">
-                        <div class="article-title">${article.title}</div>
-                        <div class="article-summary">${article.summary}</div>
-                        <div class="article-date">${new Date(article.date).toLocaleDateString()}</div>
+            try {
+                const docRef = doc(db, 'articles', id);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const article = docSnap.data();
+                    container.innerHTML = `
+                        <div class="single-article">
+                            <a href="javascript:window.showArticlesList()" class="back-button">← Back to Articles</a>
+                            <h1>${article.title}</h1>
+                            <div class="metadata">
+                                Published on ${new Date(article.date).toLocaleDateString()}
+                            </div>
+                            <div class="content">
+                                ${article.content}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <div class="single-article">
+                            <a href="javascript:window.showArticlesList()" class="back-button">← Back to Articles</a>
+                            <h1>Article not found</h1>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error("Error getting article:", error);
+                container.innerHTML = `
+                    <div class="single-article">
+                        <a href="javascript:window.showArticlesList()" class="back-button">← Back to Articles</a>
+                        <h1>Error loading article</h1>
                     </div>
-                `).join('');
+                `;
+            }
+        };
+
+        window.showArticlesList = async function() {
+            const container = document.getElementById('mainContent');
+            let html = '<h1>Articles</h1><div class="articles-grid">';
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, 'articles'));
+                
+                if (querySnapshot.empty) {
+                    html += '<p style="text-align: center; grid-column: 1/-1;">No articles yet...</p>';
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        const article = doc.data();
+                        html += `
+                            <div class="article-card" onclick="window.showArticle('${doc.id}')">
+                                <div class="article-title">${article.title}</div>
+                                <div class="article-summary">${article.summary}</div>
+                                <div class="article-date">${new Date(article.date).toLocaleDateString()}</div>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (error) {
+                console.error("Error getting articles:", error);
+                html += '<p style="text-align: center; grid-column: 1/-1;">Error loading articles...</p>';
             }
             
             html += '</div>';
             container.innerHTML = html;
-        }
-
-        function showArticle(id) {
-            const articles = JSON.parse(localStorage.getItem('articles') || '[]');
-            const article = articles.find(a => a.id === parseInt(id));
-            const container = document.getElementById('mainContent');
-            
-            container.innerHTML = `
-                <div class="single-article">
-                    <a href="javascript:void(0)" onclick="showArticlesList()" class="back-button">← Back to Articles</a>
-                    <h1>${article.title}</h1>
-                    <div class="metadata">
-                        Published on ${new Date(article.date).toLocaleDateString()}
-                    </div>
-                    <div class="content">
-                        ${article.content}
-                    </div>
-                </div>
-            `;
-
-            // Oppdater URL
-            window.history.pushState({ articleId: id }, '', `?article=${id}`);
-        }
-
-        // Håndter browser back/forward
-        window.onpopstate = function(event) {
-            if (event.state?.articleId) {
-                showArticle(event.state.articleId);
-            } else {
-                showArticlesList();
-            }
         };
 
-        // Sjekk URL ved lasting
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const articleId = urlParams.get('article');
-            
-            if (articleId) {
-                showArticle(articleId);
-            } else {
-                showArticlesList();
-            }
-        };
+        // Check URL parameters for article ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('article');
+
+        // Show article or list based on URL
+        if (articleId) {
+            window.showArticle(articleId);
+        } else {
+            window.showArticlesList();
+        }
     </script>
 </body>
 </html>
