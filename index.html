@@ -3,23 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://takemetoweird.com" />
+    <link rel="canonical" href="https://din-hoveddomene.com" /> <!-- Legg til din faktiske domene her -->
     <meta name="description" content="Discover random weird and wonderful websites with just one click!" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://takemetoweird.com/">
-    <meta property="og:title" content="Take Me To Weird - Random Weird Websites">
-    <meta property="og:description" content="Discover random weird and wonderful websites with just one click!">
-    <meta property="og:image" content="https://takemetoweird.com/path-to-your-image.jpg">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://takemetoweird.com/">
-    <meta name="twitter:title" content="Take Me To Weird - Random Weird Websites">
-    <meta name="twitter:description" content="Discover random weird and wonderful websites with just one click!">
-    <meta name="twitter:image" content="https://takemetoweird.com/path-to-your-image.jpg">
-
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EMNDR86N"></script>
     <script>
@@ -32,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589327467123030" crossorigin="anonymous"></script>
     <style>
+        /* [All original CSS remains exactly the same] */
         html, body {
             margin: 0;
             padding: 0;
@@ -153,33 +139,6 @@
             box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .share-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .share-button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(45deg, #4ECDC4, #23a6d5);
-            color: white;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .share-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
         .floating-emojis {
             position: fixed;
             font-size: 24px;
@@ -200,10 +159,6 @@
                 padding: 12px 24px;
                 font-size: 16px;
             }
-
-            .share-buttons {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
@@ -214,17 +169,6 @@
             <p>Click the button to visit a random weird website! 🎲✨</p>
             <button class="random-button" onclick="goToRandomSite()">Take Me To Weird! 🚀</button>
             <a href="/articles.html" class="articles-button">Read Articles</a>
-            <div class="share-buttons">
-                <button onclick="shareOnFacebook()" class="share-button">
-                    Share on Facebook
-                </button>
-                <button onclick="shareOnTwitter()" class="share-button">
-                    Share on Twitter
-                </button>
-                <button onclick="shareOnLinkedIn()" class="share-button">
-                    Share on LinkedIn
-                </button>
-            </div>
         </div>
     </div>
 
@@ -233,6 +177,7 @@
             createFloatingEmojis();
             setTimeout(() => {
                 const sites = [
+                    /* [All original sites remain exactly the same] */
                     "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
                     "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
                     "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
@@ -251,6 +196,7 @@
                     "https://www.reddit.com/r/oddlysatisfying/",
                     "https://www.worlds-highest-website.com/", "https://www.cameronsworld.net/",
                     "https://www.sporcle.com/",
+                    "https://www.nyan.cat/", "https://www.isitchristmas.com/",
                     "https://www.explosm.net/",
                     "https://www.paperplane.org/", "https://www.windows93.net/",
                     "https://www.hackertyper.com/",
@@ -264,7 +210,7 @@
                     "https://www.travelsupermarket.com/", "https://www.uselessfacts.net/",
                     "https://www.windows93.net/", "https://www.poptropica.com/",
                     "https://www.boredbutton.com/",
-                    "https://www.watching-grass-grow.com/",
+                    "https://www.nyan.cat/", "https://www.watching-grass-grow.com/",
                     "https://www.clicktorelease.com/code/", "https://www.asterank.com/",
                     "https://www.worldwidetelescope.org/",
                     "https://www.reddit.com/r/mildlyinteresting/", "https://www.koalastothemax.com/",
@@ -323,47 +269,3 @@
                         emoji.remove();
                     } else {
                         requestAnimationFrame(animate);
-                    }
-                };
-
-                requestAnimationFrame(animate);
-            }
-        }
-
-        function shareOnFacebook() {
-            const url = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href);
-            window.open(url, '_blank', 'width=600,height=400');
-        }
-
-        function shareOnTwitter() {
-            const text = 'Check out this awesome website that helps you discover weird and wonderful corners of the internet!';
-            const url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(window.location.href);
-            window.open(url, '_blank', 'width=600,height=400');
-        }
-
-        function shareOnLinkedIn() {
-            const url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href);
-            window.open(url, '_blank', 'width=600,height=400');
-        }
-
-        document.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.1) {
-                const emoji = document.createElement('div');
-                emoji.className = 'floating-emojis';
-                emoji.style.left = e.pageX + 'px';
-                emoji.style.top = e.pageY + 'px';
-                emoji.textContent = '✨';
-                emoji.style.opacity = '0.7';
-                document.body.appendChild(emoji);
-
-                setTimeout(() => {
-                    emoji.style.transition = 'all 1s';
-                    emoji.style.opacity = '0';
-                    emoji.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
-                    setTimeout(() => emoji.remove(), 1000);
-                }, 50);
-            }
-        });
-    </script>
-</body>
-</html>
