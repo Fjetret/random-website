@@ -1,197 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- [Head-seksjonen forblir uendret] -->
-
-<body>
-    <div class="container">
-        <div class="main-content">
-            <h1>Random Weird Website!</h1>
-            
-            <!-- Ny beskrivende seksjon -->
-            <div class="intro-section">
-                <p class="description">
-                    Welcome to Take Me To Weird - your portal to the internet's most fascinating and unique websites. 
-                    We curate and collect the web's hidden gems, from interactive art experiences to bizarre 
-                    games and mesmerizing visual experiments.
-                </p>
-                <p class="features">
-                    🎨 Interactive Art | 🎮 Weird Games | 🌈 Visual Experiences | 🎵 Sound Experiments
-                </p>
-            </div>
-
-            <button class="random-button" onclick="goToRandomSite()">Take Me To Weird! 🚀</button>
-            
-            <!-- Ny kategori-seksjon -->
-            <div class="categories">
-                <h2>Featured Categories</h2>
-                <div class="category-grid">
-                    <div class="category-card">
-                        <h3>Interactive Art</h3>
-                        <p>Explore websites that turn your browser into a canvas, creating unique digital art experiences.</p>
-                        <ul>
-                            <li>Create symmetric patterns</li>
-                            <li>Experiment with digital sand</li>
-                            <li>Generate abstract animations</li>
-                        </ul>
-                    </div>
-                    <div class="category-card">
-                        <h3>Visual Experiments</h3>
-                        <p>Mind-bending visual experiences that challenge your perception and imagination.</p>
-                        <ul>
-                            <li>Infinite zoom experiences</li>
-                            <li>Optical illusions</li>
-                            <li>Interactive animations</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Latest Articles Preview -->
-            <div class="articles-preview">
-                <h2>Latest Discoveries</h2>
-                <div id="latestArticles" class="articles-grid">
-                    <!-- Will be populated by JavaScript -->
-                </div>
-            </div>
-
-            <a href="/articles.html" class="articles-button">Read More Articles</a>
-        </div>
-    </div>
-
-    <!-- Legg til i style-seksjonen -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://takemetoweird.com" />
+    <meta name="description" content="Discover random weird and wonderful websites with just one click!" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EMNDR86N"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-M6EMNDR86N');
+    </script>
+    <title>Take Me To Weird</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589327467123030" crossorigin="anonymous"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100vh;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
         .intro-section {
-            margin: 20px 0;
-            text-align: left;
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .description {
             font-size: 1.1em;
             line-height: 1.6;
-            color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin: 0 auto 25px;
         }
 
         .features {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .categories {
-            margin: 30px 0;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            justify-content: center;
             gap: 20px;
-            margin-top: 15px;
-        }
-
-        .category-card {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: left;
-        }
-
-        .category-card h3 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-
-        .category-card p {
-            color: #666;
-            margin-bottom: 10px;
-            font-size: 0.9em;
-        }
-
-        .category-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .category-card ul li {
-            color: #555;
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        .articles-preview {
+            flex-wrap: wrap;
             margin: 30px 0;
+            font-size: 1.1em;
+            color: #666;
         }
 
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 15px;
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .random-button {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .random-button:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .random-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
         }
 
         h2 {
             font-family: 'Press Start 2P', cursive;
             color: #333;
             font-size: 18px;
-            margin: 25px 0 15px 0;
+            margin: 40px 0 20px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .category-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .category-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .category-card ul li {
+            margin: 10px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-card ul li::before {
+            content: '→';
+            color: #4ECDC4;
+        }
+
+        .latest-discoveries {
+            margin: 40px 0;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .article-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #4ECDC4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover {
+            transform: translateX(5px);
+        }
+
+        .read-more-articles {
+            display: block;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .articles-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #4ECDC4, #23a6d5);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .articles-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-emojis {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
         }
 
         @media (max-width: 768px) {
-            .category-grid {
+            .container {
+                padding: 15px;
+                margin: 20px auto;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .categories-grid,
+            .article-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .random-button {
+                padding: 12px 24px;
+                font-size: 16px;
             }
         }
     </style>
-
-    <!-- Legg til i script-seksjonen -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, query, orderBy, limit, getDocs } 
-        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyA3O3gejkuDD4oIjC8UrhFeoB0JuhNokpA",
-            authDomain: "takemetoweird.firebaseapp.com",
-            projectId: "takemetoweird",
-            storageBucket: "takemetoweird.firebasestorage.app",
-            messagingSenderId: "998902491409",
-            appId: "1:998902491409:web:d4489b86956449987284b0",
-            measurementId: "G-TML3MKY1ZE"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Fetch and display latest articles
-        async function displayLatestArticles() {
-            const articlesDiv = document.getElementById('latestArticles');
-            try {
-                const q = query(collection(db, 'articles'), orderBy('date', 'desc'), limit(2));
-                const querySnapshot = await getDocs(q);
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>Random Weird Website!</h1>
+            
+            <div class="intro-section">
+                <p class="description">
+                    Welcome to Take Me To Weird - your portal to the internet's most fascinating and unique websites. 
+                    We curate and collect the web's hidden gems, from interactive art experiences to bizarre games 
+                    and mesmerizing visual experiments.
+                </p>
                 
-                querySnapshot.forEach((doc) => {
-                    const article = doc.data();
-                    const articleElement = document.createElement('div');
-                    articleElement.className = 'category-card';
-                    articleElement.innerHTML = `
-                        <h3>${article.title}</h3>
-                        <p>${article.summary}</p>
-                        <a href="/articles.html?article=${doc.id}" style="color: #4ECDC4; text-decoration: none;">Read more →</a>
-                    `;
-                    articlesDiv.appendChild(articleElement);
-                });
-            } catch (error) {
-                console.error("Error getting articles:", error);
-            }
-        }
+                <div class="features">
+                    <div class="feature-item">🎨 Interactive Art</div>
+                    <div class="feature-item">🎮 Weird Games</div>
+                    <div class="feature-item">🌈 Visual Experiences</div>
+                    <div class="feature-item">🎵 Sound Experiments</div>
+                </div>
+            </div>
 
-        displayLatestArticles();
-    </script>
+            <button class="random-button" onclick="goToRandomSite()">Take Me To Weird! 🚀</button>
 
-    <!-- [Resten av original JavaScript forblir uendret] -->
-</body>
-</html>
+            <h2>Featured Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <h3>Interactive Art</h3>
+                    <p>Explore websites that turn your browser into a canvas, creating unique digital art experiences.</p>
+                    <ul>
+                        <li>Create symmetric patterns</li>
+                        <li>Experiment with digital sand</li>
+                        <li>Generate abstract animations</li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>Visual Experiments</h3>
+                    <p>Mind-bending visual experiences that challenge your perception and imagination.</p>
+                    <ul>
+                        <li>Infinite zoom experiences</li>
+                        <li>Optical illusions</li>
+                        <li>Interactive animations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Latest Discoveries</h2>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>The Internet's Most Useless (Yet Fascinating) Websites</h3>
+                    <p>What makes a website truly useless? In an age where every app and platform strives to maximize productivity and efficiency, there's something refreshing about websites that exist purely to amuse, confuse, or make you wonder "why?"</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </div>
+                <div class="article-card">
+                    <h3>The Web's Most Mesmerizing Visual Experiences</h3>
+                    <p>Ever found yourself staring at your screen, completely hypnotized by something that's neither a video nor a game, but something entirely different? The internet is home to some truly captivating visual experiences.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </div>
+            </div>
+
+            <div class="read-more-articles">
+                <a href="/articles.html" class="articles-button">Read More Articles</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToRandomSite() {
+            createFloatingEmojis();
+            setTimeout(() => {
+                const sites = [
+                    "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
+                    "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
+                    "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
+                    "https://checkboxrace.com", "https://papertoilet.com", "https://www.trypap.com",
+                    "https://www.omfgdogs.com", "https://www.cat-bounce.com", "https://randomcolour.com",
+                    "https://cant-not-tweet-this.com", "https://make-everything-ok.com",
+                    "https://www.hackertyper.com", "https://corndog.io/", "https://heeeeeeeey.com/",
+                    "https://chickenonaraft.com/", "https://lacquerlacquer.com/", "https://www.trashloop.com/",
+                    "https://www.fallingfalling.com/",
+                    "https://www.hereistoday.com/", "https://www.nyan.cat/", "https://hooooooooo.com/",
+                    "https://www.movenowthinklater.com/", "https://www.trypap.com/",
+                    "https://www.patience-is-a-virtue.org/", "https://www.drawastickman.com
