@@ -20,6 +20,24 @@
             line-height: 1.6;
         }
 
+        /* Editor styles */
+        .float-left {
+            float: left;
+            margin: 0 10px 10px 0;
+            max-width: 50%;
+        }
+
+        .float-right {
+            float: right;
+            margin: 0 0 10px 10px;
+            max-width: 50%;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
         #loginPanel {
             max-width: 400px;
             margin: 100px auto;
@@ -156,30 +174,6 @@
                 padding: 20px;
             }
         }
-
-        /* TinyMCE custom editor styles */
-        .mce-content-body img.left {
-            float: left;
-            margin: 0 10px 5px 0;
-            max-width: 50%;
-        }
-
-        .mce-content-body img.right {
-            float: right;
-            margin: 0 0 5px 10px;
-            max-width: 50%;
-        }
-
-        .mce-content-body img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .mce-content-body::after {
-            content: '';
-            clear: both;
-            display: table;
-        }
     </style>
 </head>
 <body>
@@ -250,40 +244,21 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // TinyMCE initialization with updated configuration
+        // TinyMCE initialization with simpler configuration
         tinymce.init({
             selector: '#content',
             plugins: 'image code link',
-            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | image link | code',
-            styles: {
-                alignleft: {
-                    selector: 'img',
-                    styles: {
-                        'float': 'left',
-                        'margin': '0 10px 5px 0'
-                    }
-                },
-                alignright: {
-                    selector: 'img',
-                    styles: {
-                        'float': 'right',
-                        'margin': '0 0 5px 10px'
-                    }
-                }
-            },
-            formats: {
-                alignleft: { selector: 'img', classes: 'left' },
-                alignright: { selector: 'img', classes: 'right' }
-            },
+            toolbar: 'undo redo | formatselect | bold italic | image link | code',
+            height: 500,
             content_style: `
-                img.left {
+                .float-left {
                     float: left;
-                    margin: 0 10px 5px 0;
+                    margin: 0 10px 10px 0;
                     max-width: 50%;
                 }
-                img.right {
+                .float-right {
                     float: right;
-                    margin: 0 0 5px 10px;
+                    margin: 0 0 10px 10px;
                     max-width: 50%;
                 }
                 img {
@@ -291,31 +266,21 @@
                     height: auto;
                 }
                 body { 
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                     line-height: 1.6;
                 }
             `,
-            height: 500,
-            file_picker_types: 'image',
+            image_class_list: [
+                {title: 'None', value: ''},
+                {title: 'Left', value: 'float-left'},
+                {title: 'Right', value: 'float-right'}
+            ],
             images_upload_handler: function (blobInfo, success, failure) {
                 var reader = new FileReader();
                 reader.readAsDataURL(blobInfo.blob());
                 reader.onload = function () {
                     success(reader.result);
                 };
-            },
-            setup: function (editor) {
-                editor.on('NodeChange', function (e) {
-                    if (e.element.nodeName === 'IMG') {
-                        editor.formatter.remove('alignleft');
-                        editor.formatter.remove('alignright');
-                        if (e.element.classList.contains('left')) {
-                            editor.formatter.apply('alignleft');
-                        } else if (e.element.classList.contains('right')) {
-                            editor.formatter.apply('alignright');
-                        }
-                    }
-                });
             }
         });
 
