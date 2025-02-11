@@ -156,6 +156,30 @@
                 padding: 20px;
             }
         }
+
+        /* TinyMCE Custom Styles */
+        .mce-content-body img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .mce-content-body img.align-left {
+            float: left;
+            margin: 0 20px 20px 0;
+            max-width: 300px;
+        }
+
+        .mce-content-body img.align-right {
+            float: right;
+            margin: 0 0 20px 20px;
+            max-width: 300px;
+        }
+
+        .mce-content-body::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     </style>
 </head>
 <body>
@@ -226,13 +250,67 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // TinyMCE initialization
+        // TinyMCE initialization with improved image handling
         tinymce.init({
             selector: '#content',
-            plugins: 'lists link image table code',
-            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | table | code',
+            plugins: 'lists link image table code media advlist autolink wordcount',
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link image | table | code | styleselect',
             height: 400,
-            menubar: false
+            menubar: true,
+            style_formats: [
+                {
+                    title: 'Image Alignment',
+                    items: [
+                        {
+                            title: 'Left',
+                            selector: 'img',
+                            styles: {
+                                'float': 'left',
+                                'margin': '0 20px 20px 0',
+                                'max-width': '300px'
+                            }
+                        },
+                        {
+                            title: 'Right',
+                            selector: 'img',
+                            styles: {
+                                'float': 'right',
+                                'margin': '0 0 20px 20px',
+                                'max-width': '300px'
+                            }
+                        }
+                    ]
+                }
+            ],
+            content_style: `
+                img { max-width: 100%; height: auto; }
+                img[style*="float:left"], img[style*="float: left"] { margin: 0 20px 20px 0; max-width: 300px; }
+                img[style*="float:right"], img[style*="float: right"] { margin: 0 0 20px 20px; max-width: 300px; }
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+            `,
+            image_title: true,
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            file_picker_callback: function(cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                input.onchange = function() {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+                input.click();
+            }
         });
 
         // Admin password
