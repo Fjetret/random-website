@@ -1,7 +1,388 @@
-function goToRandomSite() {
-    createFloatingEmojis();
-    setTimeout(() => {
-        const sites = [
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://takemetoweird.com" />
+    <meta name="description" content="Discover random weird and wonderful websites with just one click!" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EMNDR86N"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-M6EMNDR86N');
+    </script>
+    <title>Take Me To Weird</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589327467123030" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100vh;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin: 0 auto 25px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .random-button {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .random-button:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .random-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            color: #333;
+            font-size: 18px;
+            margin: 40px 0 20px;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .article-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #4ECDC4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover {
+            transform: translateX(5px);
+        }
+
+        .read-more-articles {
+            display: block;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .articles-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #4ECDC4, #23a6d5);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .articles-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-emojis {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 20px auto;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .random-button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>Random Weird Website!</h1>
+            
+            <div class="intro-section">
+                <p class="description">
+                    Welcome to Take Me To Weird - your portal to the internet's most fascinating and unique websites. 
+                    We curate and collect the web's hidden gems, from interactive art experiences to bizarre games 
+                    and mesmerizing visual experiments.
+                </p>
+                
+                <div class="features">
+                    <div class="feature-item">🎨 Interactive Art</div>
+                    <div class="feature-item">🎮 Weird Games</div>
+                    <div class="feature-item">🌈 Visual Experiences</div>
+                    <div class="feature-item">🎵 Sound Experiments</div>
+                </div>
+            </div>
+
+            <button class="random-button" onclick="goToRandomSite()">Take Me To Weird! 🚀</button>
+
+            <h2>Latest Discoveries</h2>
+            <div class="article-grid">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <div class="read-more-articles">
+                <a href="/articles.html" class="articles-button">Read More Articles</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, orderBy, limit, getDocs } 
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3O3gejkuDD4oIjC8UrhFeoB0JuhNokpA",
+            authDomain: "takemetoweird.firebaseapp.com",
+            projectId: "takemetoweird",
+            storageBucket: "takemetoweird.firebasestorage.app",
+            messagingSenderId: "998902491409",
+            appId: "1:998902491409:web:d4489b86956449987284b0",
+            measurementId: "G-TML3MKY1ZE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Fetch and display latest articles
+        async function displayLatestArticles() {
+            const articleGrid = document.querySelector('.article-grid');
+            try {
+                const q = query(collection(db, 'articles'), orderBy('date', 'desc'), limit(2));
+                const querySnapshot = await getDocs(q);
+                
+                // Clear existing content
+                articleGrid.innerHTML = '';
+                
+                querySnapshot.forEach((doc) => {
+                    const article = doc.data();
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'article-card';
+                    articleElement.innerHTML = `
+                        <h3>${article.title}</h3>
+                        <p>${article.summary}</p>
+                        <a href="/articles.html?article=${doc.id}" class="read-more">Read more →</a>
+                    `;
+                    articleGrid.appendChild(articleElement);
+                });
+            } catch (error) {
+                console.error("Error getting articles:", error);
+            }
+        }
+
+        displayLatestArticles();
+    </script>
+
+    <script>
+        function createFloatingEmojis() {
+            const emojis = ['🚀', '✨', '🎮', '🎨', '🎪', '🎭', '🎢', '🎡'];
+            for (let i = 0; i < 15; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emojis';
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = Math.random() * window.innerHeight + 'px';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(emoji);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 5;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+
+                let x = parseFloat(emoji.style.left);
+                let y = parseFloat(emoji.style.top);
+
+                const animate = () => {
+                    x += dx;
+                    y += dy;
+                    emoji.style.left = x + 'px';
+                    emoji.style.top = y + 'px';
+
+                    if (x < -50 || x > window.innerWidth + 50 || 
+                        y < -50 || y > window.innerHeight + 50) {
+                        emoji.remove();
+                    } else {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+        }
+
+        function goToRandomSite() {
+            createFloatingEmojis();
+            setTimeout(() => {
+                const sites = [
             "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
             "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
             "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
