@@ -154,61 +154,6 @@
             margin: 40px 0 20px;
         }
 
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
-        }
-
-        .category-card {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .category-card h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-
-        .category-card p {
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .category-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .category-card ul li {
-            margin: 10px 0;
-            color: #555;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .category-card ul li::before {
-            content: '→';
-            color: #4ECDC4;
-        }
-
-        .latest-discoveries {
-            margin: 40px 0;
-        }
-
         .article-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -304,7 +249,6 @@
                 align-items: center;
             }
 
-            .categories-grid,
             .article-grid {
                 grid-template-columns: 1fr;
             }
@@ -338,40 +282,9 @@
 
             <button class="random-button" onclick="goToRandomSite()">Take Me To Weird! 🚀</button>
 
-            <h2>Featured Categories</h2>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <h3>Interactive Art</h3>
-                    <p>Explore websites that turn your browser into a canvas, creating unique digital art experiences.</p>
-                    <ul>
-                        <li>Create symmetric patterns</li>
-                        <li>Experiment with digital sand</li>
-                        <li>Generate abstract animations</li>
-                    </ul>
-                </div>
-                <div class="category-card">
-                    <h3>Visual Experiments</h3>
-                    <p>Mind-bending visual experiences that challenge your perception and imagination.</p>
-                    <ul>
-                        <li>Infinite zoom experiences</li>
-                        <li>Optical illusions</li>
-                        <li>Interactive animations</li>
-                    </ul>
-                </div>
-            </div>
-
             <h2>Latest Discoveries</h2>
             <div class="article-grid">
-                <div class="article-card">
-                    <h3>The Internet's Most Useless (Yet Fascinating) Websites</h3>
-                    <p>What makes a website truly useless? In an age where every app and platform strives to maximize productivity and efficiency, there's something refreshing about websites that exist purely to amuse, confuse, or make you wonder "why?"</p>
-                    <a href="#" class="read-more">Read more →</a>
-                </div>
-                <div class="article-card">
-                    <h3>The Web's Most Mesmerizing Visual Experiences</h3>
-                    <p>Ever found yourself staring at your screen, completely hypnotized by something that's neither a video nor a game, but something entirely different? The internet is home to some truly captivating visual experiences.</p>
-                    <a href="#" class="read-more">Read more →</a>
-                </div>
+                <!-- Will be populated by JavaScript -->
             </div>
 
             <div class="read-more-articles">
@@ -380,20 +293,175 @@
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, orderBy, limit, getDocs } 
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3O3gejkuDD4oIjC8UrhFeoB0JuhNokpA",
+            authDomain: "takemetoweird.firebaseapp.com",
+            projectId: "takemetoweird",
+            storageBucket: "takemetoweird.firebasestorage.app",
+            messagingSenderId: "998902491409",
+            appId: "1:998902491409:web:d4489b86956449987284b0",
+            measurementId: "G-TML3MKY1ZE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Fetch and display latest articles
+        async function displayLatestArticles() {
+            const articleGrid = document.querySelector('.article-grid');
+            try {
+                const q = query(collection(db, 'articles'), orderBy('date', 'desc'), limit(2));
+                const querySnapshot = await getDocs(q);
+                
+                // Clear existing content
+                articleGrid.innerHTML = '';
+                
+                querySnapshot.forEach((doc) => {
+                    const article = doc.data();
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'article-card';
+                    articleElement.innerHTML = `
+                        <h3>${article.title}</h3>
+                        <p>${article.summary}</p>
+                        <a href="/articles.html?article=${doc.id}" class="read-more">Read more →</a>
+                    `;
+                    articleGrid.appendChild(articleElement);
+                });
+            } catch (error) {
+                console.error("Error getting articles:", error);
+            }
+        }
+
+        displayLatestArticles();
+    </script>
+
     <script>
-        function goToRandomSite() {
-            createFloatingEmojis();
-            setTimeout(() => {
-                const sites = [
-                    "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
-                    "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
-                    "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
-                    "https://checkboxrace.com", "https://papertoilet.com", "https://www.trypap.com",
-                    "https://www.omfgdogs.com", "https://www.cat-bounce.com", "https://randomcolour.com",
-                    "https://cant-not-tweet-this.com", "https://make-everything-ok.com",
-                    "https://www.hackertyper.com", "https://corndog.io/", "https://heeeeeeeey.com/",
-                    "https://chickenonaraft.com/", "https://lacquerlacquer.com/", "https://www.trashloop.com/",
-                    "https://www.fallingfalling.com/",
-                    "https://www.hereistoday.com/", "https://www.nyan.cat/", "https://hooooooooo.com/",
-                    "https://www.movenowthinklater.com/", "https://www.trypap.com/",
-                    "https://www.patience-is-a-virtue.org/", "https://www.drawastickman.com
+        function createFloatingEmojis() {
+            const emojis = ['🚀', '✨', '🎮', '🎨', '🎪', '🎭', '🎢', '🎡'];
+            for (let i = 0; i < 15; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emojis';
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = Math.random() * window.innerHeight + 'px';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(emoji);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 5;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+
+                let x = parseFloat(emoji.style.left);
+                let y = parseFloat(emoji.style.top);
+
+                const animate = () => {
+                    x += dx;
+                    y += dy;
+                    emoji.style.left = x + 'px';
+                    emoji.style.top = y + 'px';
+
+                    if (x < -50 || x > window.innerWidth + 50 || 
+                        y < -50 || y > window.innerHeight + 50) {
+                        emoji.remove();
+                    } else {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+        }
+
+      function goToRandomSite() {
+    createFloatingEmojis();
+    setTimeout(() => {
+        const sites = [
+            "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
+            "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
+            "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
+            "https://checkboxrace.com", "https://papertoilet.com", "https://www.trypap.com",
+            "https://www.omfgdogs.com", "https://www.cat-bounce.com", "https://randomcolour.com",
+            "https://cant-not-tweet-this.com", "https://make-everything-ok.com",
+            "https://www.hackertyper.com", "https://corndog.io/", "https://heeeeeeeey.com/",
+            "https://chickenonaraft.com/", "https://lacquerlacquer.com/", "https://www.trashloop.com/",
+            "https://www.fallingfalling.com/",
+            "https://www.hereistoday.com/", "https://www.nyan.cat/", "https://hooooooooo.com/",
+            "https://www.movenowthinklater.com/", "https://www.trypap.com/",
+            "https://www.patience-is-a-virtue.org/", "https://www.drawastickman.com/",
+            "https://www.weirdorconfusing.com/", "https://www.koalastothemax.com/",
+            "https://www.isitchristmas.com/", "https://www.fakenamegenerator.com/",
+            "https://www.thispersondoesnotexist.com/", "https://www.explainxkcd.com/",
+            "https://www.reddit.com/r/oddlysatisfying/",
+            "https://www.worlds-highest-website.com/", "https://www.cameronsworld.net/",
+            "https://www.sporcle.com/",
+            "https://www.explosm.net/",
+            "https://www.paperplane.org/", "https://www.windows93.net/",
+            "https://www.hackertyper.com/",
+            "https://www.worldwidetelescope.org/",
+            "https://www.antipodesmap.com/", "https://www.trashloop.com/",
+            "https://www.blahtherapy.com/", "https://www.spacejam.com/1996/",
+            "https://www.fallingfalling.com/", "https://www.friv.com/",
+            "https://www.y8.com/",
+            "https://www.mentalfloss.com/", "https://www.puginarug.com/",
+            "https://www.lostinspace.com/", "https://www.rainymood.com/",
+            "https://www.travelsupermarket.com/", "https://www.uselessfacts.net/",
+            "https://www.windows93.net/", "https://www.poptropica.com/",
+            "https://www.boredbutton.com/",
+            "https://www.watching-grass-grow.com/",
+            "https://www.clicktorelease.com/code/", "https://www.asterank.com/",
+            "https://www.worldwidetelescope.org/",
+            "https://www.reddit.com/r/mildlyinteresting/", "https://www.koalastothemax.com/",
+            "https://www.drawastickman.com/",
+            "https://www.patience-is-a-virtue.org/",
+            "https://www.windows93.net/", "https://www.puginarug.com/",
+            "https://www.trypap.com/", "https://www.asterank.com/",
+            "https://www.mentalfloss.com/", "https://www.weirdorconfusing.com/",
+            "https://infinitemac.org/",
+            "http://www.howmanypeopleareinspacerightnow.com/", "https://www.deathball.net/notpron/",
+            "https://www.cat-bounce.com/", "https://zombo.com/", "https://www.electricboogiewoogie.com/",
+            "https://thatsthefinger.com/", "https://www.rrrgggbbb.com/", "http://www.youshouldhaveseenthis.com/", 
+            "https://pleaselike.com/", "https://quickdraw.withgoogle.com/", 
+            "https://zombiepassions.com/", "https://binarypiano.com/", "https://findtheinvisiblecow.com/", 
+            "http://www.nooo.me/", "https://www.cornify.com/", 
+            "https://screamintothevoid.com/", "https://beesbeesbeesbees.com/", "https://thequietplaceproject.xyz/",
+            "https://www.passweird.com/", 
+            "https://ytmnd.com/", "https://www.tane.us/", "https://thenicestplace.net/",
+            "https://clickclickclick.click/#27b1c3c727ef75acdbfe6d5230cd4cd2", 
+            "https://baconipsum.com/", "https://r33b.net/", "https://burymewithmymoney.com/",
+            "https://stellarium-web.org/", "https://ffffidget.com/", 
+            "https://sandspiel.club/", "https://theuselessweb.site/blueballmachine/", "https://mondrianandme.com/",
+            "https://www.intotime.com/", 
+            "https://strobe.cool/", "https://sadtrombone.com/"
+        ];
+        window.open(sites[Math.floor(Math.random() * sites.length)], "_blank");
+    }, 500);
+}
+
+document.addEventListener('mousemove', (e) => {
+    if (Math.random() < 0.1) {
+        const emoji = document.createElement('div');
+        emoji.className = 'floating-emojis';
+        emoji.style.left = e.pageX + 'px';
+        emoji.style.top = e.pageY + 'px';
+        emoji.textContent = '✨';
+        emoji.style.opacity = '0.7';
+        document.body.appendChild(emoji);
+
+        setTimeout(() => {
+            emoji.style.transition = 'all 1s';
+            emoji.style.opacity = '0';
+            emoji.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+            setTimeout(() => emoji.remove(), 1000);
+        }, 50);
+    }
+});
+</script>
+</body>
+</html>
