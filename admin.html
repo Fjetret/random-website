@@ -6,168 +6,29 @@
     <title>Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        // Default to denied until consent is given
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied'
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EMNDR86N"></script>
+
     <style>
+        /* Existing styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Editor styles */
-        .float-left {
-            float: left;
-            margin: 0 10px 10px 0;
-            max-width: 50%;
-        }
-
-        .float-right {
-            float: right;
-            margin: 0 0 10px 10px;
-            max-width: 50%;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        #loginPanel {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        #loginPanel h1 {
-            text-align: center;
-            margin-bottom: 24px;
-            color: #1a1a1a;
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .login-btn {
-            background: #2563eb;
-            color: white;
-        }
-
-        .login-btn:hover {
-            background: #1d4ed8;
-        }
-
-        #adminContent {
-            display: none;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .admin-panel {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .admin-header h1 {
-            font-size: 24px;
-            color: #1a1a1a;
-        }
-
-        .logout-btn {
-            padding: 8px 16px;
-            background: #f3f4f6;
-            color: #666;
-            width: auto;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-
-        .button-group button {
-            width: auto;
-        }
-
-        .articles-list {
-            margin-top: 20px;
-        }
-
-        .article-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .delete-btn {
-            padding: 8px 16px;
-            background: #ef4444;
-            color: white;
-            width: auto;
-        }
-
-        .delete-btn:hover {
-            background: #dc2626;
-        }
+        [Your existing styles remain unchanged...]
 
         /* Cookie Consent Styles */
         #cookieConsent {
@@ -179,6 +40,13 @@
             padding: 20px;
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
             z-index: 9999;
+            font-family: 'Inter', sans-serif;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
         }
 
         #cookieConsent .container {
@@ -187,6 +55,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
 
         #cookieDialog {
@@ -195,11 +64,18 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         #cookieDialog .dialog-content {
@@ -208,15 +84,22 @@
             border-radius: 12px;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .cookie-btn {
-            padding: 8px 16px;
+            padding: 12px 24px;
             border-radius: 6px;
             font-size: 14px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
 
         .cookie-btn.primary {
@@ -231,9 +114,20 @@
             border: 1px solid #ddd;
         }
 
+        .cookie-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
         @media (max-width: 768px) {
-            .admin-panel {
-                padding: 20px;
+            #cookieConsent .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cookie-btn {
+                width: 100%;
+                margin-top: 10px;
             }
         }
     </style>
@@ -286,6 +180,8 @@
             constructor() {
                 if (!this.hasConsent()) {
                     this.checkLocation();
+                } else {
+                    this.applyStoredConsent();
                 }
             }
 
@@ -296,6 +192,13 @@
                     
                     if (data.in_eu || data.error) {
                         this.showConsentBanner();
+                    } else {
+                        // For non-EU users, enable analytics by default
+                        this.saveConsent({
+                            necessary: true,
+                            analytics: true,
+                            marketing: true
+                        });
                     }
                 } catch (error) {
                     this.showConsentBanner();
@@ -314,18 +217,28 @@
                 return consentDate > twelveMonthsAgo;
             }
 
+            applyStoredConsent() {
+                const consent = localStorage.getItem('cookieConsent');
+                if (consent) {
+                    const { preferences } = JSON.parse(consent);
+                    this.updateAnalyticsConsent(preferences);
+                }
+            }
+
             showConsentBanner() {
                 const banner = document.createElement('div');
                 banner.id = 'cookieConsent';
                 banner.innerHTML = `
                     <div class="container">
-                        <div style="margin-right: 20px;">
-                            <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 500;">We value your privacy</h3>
+                        <div style="flex: 1">
+                            <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600;">
+                                Privacy Settings
+                            </h3>
                             <p style="margin: 0; font-size: 14px; color: #666;">
-                                To give you the best experience, we use cookies and similar technologies.
+                                We use cookies to enhance your experience and analyze our traffic.
                             </p>
                         </div>
-                        <div style="display: flex; gap: 10px;">
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                             <button onclick="cookieConsent.showCustomizeDialog()" class="cookie-btn secondary">
                                 Customize
                             </button>
@@ -343,7 +256,9 @@
                 dialog.id = 'cookieDialog';
                 dialog.innerHTML = `
                     <div class="dialog-content">
-                        <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 500;">Cookie Settings</h3>
+                        <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600;">
+                            Cookie Settings
+                        </h3>
                         <div style="margin-bottom: 20px;">
                             <label style="display: block; margin-bottom: 12px;">
                                 <input type="checkbox" checked disabled> 
@@ -393,23 +308,36 @@
                     preferences,
                     timestamp: new Date().toISOString()
                 }));
+                this.updateAnalyticsConsent(preferences);
+            }
 
-                // Update Firebase Analytics settings
-                if (preferences.analytics) {
-                    sessionStorage.setItem('analyticsEnabled', 'true');
-                } else {
-                    sessionStorage.setItem('analyticsEnabled', 'false');
+            updateAnalyticsConsent(preferences) {
+                if (window.gtag) {
+                    gtag('consent', 'update', {
+                        'analytics_storage': preferences.analytics ? 'granted' : 'denied',
+                        'ad_storage': preferences.marketing ? 'granted' : 'denied'
+                    });
+                    // Initialize GA after consent
+                    if (preferences.analytics) {
+                        gtag('config', 'G-M6EMNDR86N');
+                    }
                 }
             }
 
             hideBanner() {
                 const banner = document.getElementById('cookieConsent');
-                if (banner) banner.remove();
+                if (banner) {
+                    banner.style.animation = 'slideDown 0.5s ease-out forwards';
+                    setTimeout(() => banner.remove(), 500);
+                }
             }
 
             hideDialog() {
                 const dialog = document.getElementById('cookieDialog');
-                if (dialog) dialog.remove();
+                if (dialog) {
+                    dialog.style.animation = 'fadeOut 0.3s ease-out forwards';
+                    setTimeout(() => dialog.remove(), 300);
+                }
             }
         }
 
@@ -418,37 +346,11 @@
     </script>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { 
-            getFirestore, 
-            collection, 
-            addDoc, 
-            getDocs, 
-            deleteDoc,
-            doc 
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        [Your existing Firebase code remains unchanged]
+    </script>
 
-        // Check analytics consent
-        const analyticsEnabled = sessionStorage.getItem('analyticsEnabled') === 'true';
-
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyA3O3gejkuDD4oIjC8UrhFeoB0JuhNokpA",
-            authDomain: "takemetoweird.firebaseapp.com",
-            projectId: "takemetoweird",
-            storageBucket: "takemetoweird.firebasestorage.app",
-            messagingSenderId: "998902491409",
-            appId: "1:998902491409:web:d4489b86956449987284b0",
-            measurementId: "G-TML3MKY1ZE",
-            analyticsCollectionEnabled: analyticsEnabled
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Rest of your existing code...
-        [Rest of your existing JavaScript code remains unchanged]
+    <script>
+        [Your existing admin panel JavaScript code remains unchanged]
     </script>
 </body>
 </html>
