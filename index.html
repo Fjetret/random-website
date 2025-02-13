@@ -1,12 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+    <link rel="canonical" href="https://takemetoweird.com" />
+    <meta name="description" content="Discover random weird and wonderful websites with just one click!" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EMNDR86N"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-M6EMNDR86N');
+    </script>
+    <title>Take Me To Weird</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589327467123030" crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -14,221 +24,279 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
+        html, body {
+            min-height: 100vh;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             color: #333;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Editor styles */
-        .float-left {
-            float: left;
-            margin: 0 10px 10px 0;
-            max-width: 50%;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .float-right {
-            float: right;
-            margin: 0 0 10px 10px;
-            max-width: 50%;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        #loginPanel {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        #loginPanel h1 {
-            text-align: center;
-            margin-bottom: 24px;
-            color: #1a1a1a;
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .login-btn {
-            background: #2563eb;
-            color: white;
-        }
-
-        .login-btn:hover {
-            background: #1d4ed8;
-        }
-
-        #adminContent {
-            display: none;
-            max-width: 1200px;
+        .container {
+            max-width: 1100px;
             margin: 40px auto;
             padding: 20px;
         }
 
-        .admin-panel {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
-        .admin-header h1 {
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #333;
             font-size: 24px;
-            color: #1a1a1a;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .logout-btn {
-            padding: 8px 16px;
-            background: #f3f4f6;
+        .intro-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin: 0 auto 25px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            font-size: 1.1em;
             color: #666;
-            width: auto;
         }
 
-        .button-group {
+        .feature-item {
             display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-
-        .button-group button {
-            width: auto;
-        }
-
-        .articles-list {
-            margin-top: 20px;
-        }
-
-        .article-item {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 16px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .delete-btn {
+            gap: 8px;
             padding: 8px 16px;
-            background: #ef4444;
-            color: white;
-            width: auto;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            transition: transform 0.3s ease;
         }
 
-        .delete-btn:hover {
-            background: #dc2626;
+        .feature-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .random-button {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .random-button:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .random-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            color: #333;
+            font-size: 18px;
+            margin: 40px 0 20px;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .article-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #4ECDC4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover {
+            transform: translateX(5px);
+        }
+
+        .read-more-articles {
+            display: block;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .articles-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #4ECDC4, #23a6d5);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .articles-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-emojis {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
         }
 
         @media (max-width: 768px) {
-            .admin-panel {
+            .container {
+                padding: 15px;
+                margin: 20px auto;
+            }
+
+            .main-content {
                 padding: 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .random-button {
+                padding: 12px 24px;
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div id="loginPanel">
-        <h1>Admin Login</h1>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" required>
-        </div>
-        <button class="login-btn" onclick="window.login()">Login</button>
-    </div>
+    <div class="container">
+        <div class="main-content">
+            <h1>Random Weird Website!</h1>
+            
+            <div class="intro-section">
+                <p class="description">
+                    Welcome to Take Me To Weird - your portal to the internet's most fascinating and unique websites. 
+                    We curate and collect the web's hidden gems, from interactive art experiences to bizarre games 
+                    and mesmerizing visual experiments.
+                </p>
+                
+                <div class="features">
+                    <div class="feature-item">🎨 Interactive Art</div>
+                    <div class="feature-item">🎮 Weird Games</div>
+                    <div class="feature-item">🌈 Visual Experiences</div>
+                    <div class="feature-item">🎵 Sound Experiments</div>
+                </div>
+            </div>
 
-    <div id="adminContent">
-        <div class="admin-header">
-            <h1>Admin Dashboard</h1>
-            <button class="logout-btn" onclick="window.logout()">Logout</button>
-        </div>
+            <button class="random-button" onclick="goToRandomSite()">Take Me To Weird! 🚀</button>
 
-        <div class="admin-panel">
-            <form id="articleForm">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="summary">Summary</label>
-                    <input type="text" id="summary" required>
-                </div>
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea id="content"></textarea>
-                </div>
-                <div class="button-group">
-                    <button type="submit" class="login-btn">Save Article</button>
-                </div>
-            </form>
-        </div>
+            <h2>Latest Discoveries</h2>
+            <div class="article-grid">
+                <!-- Will be populated by JavaScript -->
+            </div>
 
-        <div class="admin-panel">
-            <h2>Articles</h2>
-            <div id="articlesList" class="articles-list"></div>
+            <div class="read-more-articles">
+                <a href="/articles.html" class="articles-button">Read More Articles</a>
+            </div>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { 
-            getFirestore, 
-            collection, 
-            addDoc, 
-            getDocs, 
-            deleteDoc,
-            doc 
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, query, orderBy, limit, getDocs } 
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         // Firebase configuration
         const firebaseConfig = {
@@ -245,177 +313,155 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // TinyMCE initialization with simpler configuration
-        tinymce.init({
-            selector: '#content',
-            plugins: 'image code link',
-            toolbar: 'undo redo | formatselect | bold italic | image link | code',
-            height: 500,
-            content_style: `
-                .float-left {
-                    float: left;
-                    margin: 0 10px 10px 0;
-                    max-width: 50%;
-                }
-                .float-right {
-                    float: right;
-                    margin: 0 0 10px 10px;
-                    max-width: 50%;
-                }
-                img {
-                    max-width: 100%;
-                    height: auto;
-                }
-                body { 
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                    line-height: 1.6;
-                }
-            `,
-            image_class_list: [
-                {title: 'None', value: ''},
-                {title: 'Left', value: 'float-left'},
-                {title: 'Right', value: 'float-right'}
-            ],
-            images_upload_handler: function (blobInfo, success, failure) {
-                var reader = new FileReader();
-                reader.readAsDataURL(blobInfo.blob());
-                reader.onload = function () {
-                    success(reader.result);
-                };
-            }
-        });
-
-        // Admin password
-        const ADMINPASS = "TakeMe2Weird!";
-        let loginAttempts = 0;
-        let lastLoginAttempt = 0;
-
-        window.login = function() {
-            const currentTime = Date.now();
-            
-            if (loginAttempts >= 3 && currentTime - lastLoginAttempt < 300000) {
-                const remainingTime = Math.ceil((300000 - (currentTime - lastLoginAttempt)) / 60000);
-                alert(`Too many attempts. Try again in ${remainingTime} minutes.`);
-                return;
-            }
-
-            const password = document.getElementById('password').value;
-            
-            if (password === ADMINPASS) {
-                sessionStorage.setItem('_auth', 'true');
-                sessionStorage.setItem('_ts', Date.now().toString());
-                document.getElementById('loginPanel').style.display = 'none';
-                document.getElementById('adminContent').style.display = 'block';
-                renderArticlesList();
-                loginAttempts = 0;
-            } else {
-                loginAttempts++;
-                lastLoginAttempt = currentTime;
-                alert('Incorrect password!');
-            }
-            document.getElementById('password').value = '';
-        };
-
-        window.logout = function() {
-            sessionStorage.removeItem('_auth');
-            sessionStorage.removeItem('_ts');
-            window.location.reload();
-        };
-
-        window.deleteArticle = async function(docId) {
-            if (confirm('Are you sure you want to delete this article?')) {
-                try {
-                    await deleteDoc(doc(db, 'articles', docId));
-                    renderArticlesList();
-                } catch (error) {
-                    console.error("Error deleting article: ", error);
-                    alert('Error deleting article.');
-                }
-            }
-        };
-
-        async function renderArticlesList() {
-            const list = document.getElementById('articlesList');
+        // Fetch and display latest articles
+        async function displayLatestArticles() {
+            const articleGrid = document.querySelector('.article-grid');
             try {
-                const querySnapshot = await getDocs(collection(db, 'articles'));
-                if (querySnapshot.empty) {
-                    list.innerHTML = '<p>No articles yet.</p>';
-                    return;
-                }
-
-                list.innerHTML = querySnapshot.docs.map(doc => {
+                const q = query(collection(db, 'articles'), orderBy('date', 'desc'), limit(2));
+                const querySnapshot = await getDocs(q);
+                
+                // Clear existing content
+                articleGrid.innerHTML = '';
+                
+                querySnapshot.forEach((doc) => {
                     const article = doc.data();
-                    return `
-                        <div class="article-item">
-                            <div>
-                                <h3>${article.title}</h3>
-                                <div>${new Date(article.date).toLocaleDateString()}</div>
-                            </div>
-                            <button onclick="window.deleteArticle('${doc.id}')" class="delete-btn">Delete</button>
-                        </div>
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'article-card';
+                    articleElement.innerHTML = `
+                        <h3>${article.title}</h3>
+                        <p>${article.summary}</p>
+                        <a href="/articles.html?article=${doc.id}" class="read-more">Read more →</a>
                     `;
-                }).join('');
+                    articleGrid.appendChild(articleElement);
+                });
             } catch (error) {
-                console.error("Error getting articles: ", error);
-                list.innerHTML = '<p>Error loading articles.</p>';
+                console.error("Error getting articles:", error);
             }
         }
 
-        // Form submission
-        document.getElementById('articleForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const title = document.getElementById('title').value.trim();
-            const summary = document.getElementById('summary').value.trim();
-            const content = tinymce.get('content').getContent().trim();
-
-            if (!title || !summary || !content) {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            const formData = {
-                title: title,
-                summary: summary,
-                content: content,
-                date: new Date().toISOString()
-            };
-
-            try {
-                await addDoc(collection(db, 'articles'), formData);
-                document.getElementById('articleForm').reset();
-                tinymce.get('content').setContent('');
-                renderArticlesList();
-                alert('Article saved!');
-            } catch (error) {
-                console.error("Error adding article: ", error);
-                alert('Error saving article.');
-            }
-        });
-
-        // Check login status on load
-        function checkLoginStatus() {
-            const isLoggedIn = sessionStorage.getItem('_auth') === 'true';
-            const lastLoginTime = parseInt(sessionStorage.getItem('_ts') || '0');
-            const currentTime = Date.now();
-            
-            if (isLoggedIn && (currentTime - lastLoginTime > 30 * 60 * 1000)) {
-                window.logout();
-                return;
-            }
-
-            document.getElementById('loginPanel').style.display = isLoggedIn ? 'none' : 'block';
-            document.getElementById('adminContent').style.display = isLoggedIn ? 'block' : 'none';
-            if (isLoggedIn) {
-                renderArticlesList();
-            }
-        }
-
-        // Initial check
-        checkLoginStatus();
-        
-        // Periodic check
-        setInterval(checkLoginStatus, 60000);
+        displayLatestArticles();
     </script>
+
+    <script>
+        function createFloatingEmojis() {
+            const emojis = ['🚀', '✨', '🎮', '🎨', '🎪', '🎭', '🎢', '🎡'];
+            for (let i = 0; i < 15; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emojis';
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = Math.random() * window.innerHeight + 'px';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(emoji);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 5;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+
+                let x = parseFloat(emoji.style.left);
+                let y = parseFloat(emoji.style.top);
+
+                const animate = () => {
+                    x += dx;
+                    y += dy;
+                    emoji.style.left = x + 'px';
+                    emoji.style.top = y + 'px';
+
+                    if (x < -50 || x > window.innerWidth + 50 || 
+                        y < -50 || y > window.innerHeight + 50) {
+                        emoji.remove();
+                    } else {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+        }
+
+        function goToRandomSite() {
+            createFloatingEmojis();
+            setTimeout(() => {
+                const sites = [
+            "http://pointerpointer.com", "http://zoomquilt.org", "http://staggeringbeauty.com",
+            "http://procatinator.com", "http://fallingfalling.com", "http://thisissand.com",
+            "http://eelslap.com", "http://chrismckenzie.com", "https://longdogechallenge.com",
+            "https://checkboxrace.com", "https://papertoilet.com", "https://www.trypap.com",
+            "https://www.omfgdogs.com", "https://www.cat-bounce.com", "https://randomcolour.com",
+            "https://cant-not-tweet-this.com", "https://make-everything-ok.com",
+            "https://www.hackertyper.com", "https://corndog.io/", "https://heeeeeeeey.com/",
+            "https://chickenonaraft.com/", "https://lacquerlacquer.com/", "https://www.trashloop.com/",
+            "https://www.fallingfalling.com/",
+            "https://www.hereistoday.com/", "https://www.nyan.cat/", "https://hooooooooo.com/",
+            "https://www.movenowthinklater.com/", "https://www.trypap.com/",
+            "https://www.patience-is-a-virtue.org/", "https://www.drawastickman.com/",
+            "https://www.weirdorconfusing.com/", "https://www.koalastothemax.com/",
+            "https://www.isitchristmas.com/", "https://www.fakenamegenerator.com/",
+            "https://www.thispersondoesnotexist.com/", "https://www.explainxkcd.com/",
+            "https://www.reddit.com/r/oddlysatisfying/",
+            "https://www.worlds-highest-website.com/", "https://www.cameronsworld.net/",
+            "https://www.sporcle.com/",
+            "https://www.explosm.net/",
+            "https://www.paperplane.org/", "https://www.windows93.net/",
+            "https://www.hackertyper.com/",
+            "https://www.worldwidetelescope.org/",
+            "https://www.antipodesmap.com/", "https://www.trashloop.com/",
+            "https://www.blahtherapy.com/", "https://www.spacejam.com/1996/",
+            "https://www.fallingfalling.com/", "https://www.friv.com/",
+            "https://www.y8.com/",
+            "https://www.mentalfloss.com/", "https://www.puginarug.com/",
+            "https://www.lostinspace.com/", "https://www.rainymood.com/",
+            "https://www.travelsupermarket.com/", "https://www.uselessfacts.net/",
+            "https://www.windows93.net/", "https://www.poptropica.com/",
+            "https://www.boredbutton.com/",
+            "https://www.watching-grass-grow.com/",
+            "https://www.clicktorelease.com/code/", "https://www.asterank.com/",
+            "https://www.worldwidetelescope.org/",
+            "https://www.reddit.com/r/mildlyinteresting/", "https://www.koalastothemax.com/",
+            "https://www.drawastickman.com/",
+            "https://www.patience-is-a-virtue.org/",
+            "https://www.windows93.net/", "https://www.puginarug.com/",
+            "https://www.trypap.com/", "https://www.asterank.com/",
+            "https://www.mentalfloss.com/", "https://www.weirdorconfusing.com/",
+            "https://infinitemac.org/",
+            "http://www.howmanypeopleareinspacerightnow.com/", "https://www.deathball.net/notpron/",
+            "https://www.cat-bounce.com/", "https://zombo.com/", "https://www.electricboogiewoogie.com/",
+            "https://thatsthefinger.com/", "https://www.rrrgggbbb.com/", "http://www.youshouldhaveseenthis.com/", 
+            "https://pleaselike.com/", "https://quickdraw.withgoogle.com/", 
+            "https://zombiepassions.com/", "https://binarypiano.com/", "https://findtheinvisiblecow.com/", 
+            "http://www.nooo.me/", "https://www.cornify.com/", 
+            "https://screamintothevoid.com/", "https://beesbeesbeesbees.com/", "https://thequietplaceproject.xyz/",
+            "https://www.passweird.com/", 
+            "https://ytmnd.com/", "https://www.tane.us/", "https://thenicestplace.net/",
+            "https://clickclickclick.click/#27b1c3c727ef75acdbfe6d5230cd4cd2", 
+            "https://baconipsum.com/", "https://r33b.net/", "https://burymewithmymoney.com/",
+            "https://stellarium-web.org/", "https://ffffidget.com/", 
+            "https://sandspiel.club/", "https://theuselessweb.site/blueballmachine/", "https://mondrianandme.com/",
+            "https://www.intotime.com/", 
+            "https://strobe.cool/", "https://sadtrombone.com/"
+        ];
+        window.open(sites[Math.floor(Math.random() * sites.length)], "_blank");
+    }, 500);
+}
+
+document.addEventListener('mousemove', (e) => {
+    if (Math.random() < 0.1) {
+        const emoji = document.createElement('div');
+        emoji.className = 'floating-emojis';
+        emoji.style.left = e.pageX + 'px';
+        emoji.style.top = e.pageY + 'px';
+        emoji.textContent = '✨';
+        emoji.style.opacity = '0.7';
+        document.body.appendChild(emoji);
+
+        setTimeout(() => {
+            emoji.style.transition = 'all 1s';
+            emoji.style.opacity = '0';
+            emoji.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+            setTimeout(() => emoji.remove(), 1000);
+        }, 50);
+    }
+});
+</script>
 </body>
 </html>
