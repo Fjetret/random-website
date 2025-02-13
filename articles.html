@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://din-hoveddomene.com/articles.html" />
     <meta name="description" content="Read our articles about the most interesting and weird websites on the internet. Discover hidden gems and unique online experiences." />
-    <!-- Google tag (gtag.js) - will be initialized after consent -->
+    
+    <!-- Google tag (gtag.js) -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -21,7 +22,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589327467123030" crossorigin="anonymous"></script>
     <style>
-        /* Your existing styles remain the same */
+        /* Your existing styles remain unchanged */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            line-height: 1.6;
+            color: #333;
+        }
+
         [Previous styles remain unchanged...]
 
         /* Cookie Consent Styles */
@@ -36,6 +53,12 @@
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
             z-index: 9999;
             font-family: 'Poppins', sans-serif;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
         }
 
         #cookieConsent .container {
@@ -44,6 +67,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
 
         #cookieDialog {
@@ -58,6 +82,12 @@
             justify-content: center;
             z-index: 10000;
             backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         #cookieDialog .dialog-content {
@@ -67,15 +97,24 @@
             max-width: 500px;
             width: 90%;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .cookie-btn {
-            padding: 8px 16px;
+            padding: 12px 24px;
             border-radius: 50px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .cookie-btn.primary {
@@ -91,8 +130,20 @@
         }
 
         .cookie-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px) rotate(-1deg);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            #cookieConsent .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cookie-btn {
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
@@ -160,18 +211,20 @@
                 banner.id = 'cookieConsent';
                 banner.innerHTML = `
                     <div class="container">
-                        <div style="margin-right: 20px;">
-                            <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600;">We value your privacy</h3>
+                        <div style="flex: 1">
+                            <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; font-family: 'Press Start 2P', cursive;">
+                                🍪 Privacy Settings
+                            </h3>
                             <p style="margin: 0; font-size: 14px; color: #666;">
-                                To give you the best experience, we use cookies and similar technologies.
+                                We use cookies to make your journey to weird websites even better!
                             </p>
                         </div>
-                        <div style="display: flex; gap: 10px;">
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                             <button onclick="cookieConsent.showCustomizeDialog()" class="cookie-btn secondary">
-                                Customize
+                                Customize 🔧
                             </button>
                             <button onclick="cookieConsent.acceptAll()" class="cookie-btn primary">
-                                Accept All
+                                Accept All 🚀
                             </button>
                         </div>
                     </div>
@@ -184,24 +237,26 @@
                 dialog.id = 'cookieDialog';
                 dialog.innerHTML = `
                     <div class="dialog-content">
-                        <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600;">Cookie Settings</h3>
+                        <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; font-family: 'Press Start 2P', cursive;">
+                            🛠️ Cookie Settings
+                        </h3>
                         <div style="margin-bottom: 20px;">
                             <label style="display: block; margin-bottom: 12px;">
                                 <input type="checkbox" checked disabled> 
-                                <span style="font-size: 14px; margin-left: 8px;">Necessary (Required)</span>
+                                <span style="font-size: 14px; margin-left: 8px;">Necessary (Required) 🔒</span>
                             </label>
                             <label style="display: block; margin-bottom: 12px;">
                                 <input type="checkbox" id="analyticsCheck"> 
-                                <span style="font-size: 14px; margin-left: 8px;">Analytics</span>
+                                <span style="font-size: 14px; margin-left: 8px;">Analytics 📊</span>
                             </label>
                             <label style="display: block; margin-bottom: 12px;">
                                 <input type="checkbox" id="marketingCheck"> 
-                                <span style="font-size: 14px; margin-left: 8px;">Marketing</span>
+                                <span style="font-size: 14px; margin-left: 8px;">Marketing 🎯</span>
                             </label>
                         </div>
                         <div style="display: flex; justify-content: flex-end; gap: 10px;">
                             <button onclick="cookieConsent.savePreferences()" class="cookie-btn primary">
-                                Save Preferences
+                                Save Preferences ✨
                             </button>
                         </div>
                     </div>
@@ -252,12 +307,18 @@
 
             hideBanner() {
                 const banner = document.getElementById('cookieConsent');
-                if (banner) banner.remove();
+                if (banner) {
+                    banner.style.animation = 'slideDown 0.5s ease-out forwards';
+                    setTimeout(() => banner.remove(), 500);
+                }
             }
 
             hideDialog() {
                 const dialog = document.getElementById('cookieDialog');
-                if (dialog) dialog.remove();
+                if (dialog) {
+                    dialog.style.animation = 'fadeOut 0.3s ease-out forwards';
+                    setTimeout(() => dialog.remove(), 300);
+                }
             }
         }
 
